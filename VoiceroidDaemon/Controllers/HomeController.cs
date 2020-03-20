@@ -32,7 +32,7 @@ namespace VoiceroidDaemon.Controllers
             if (system_setting != null)
             {
                 string error_message = null;
-                bool saved = false;
+                var saved = false;
                 Setting.Lock();
                 try
                 {
@@ -62,7 +62,7 @@ namespace VoiceroidDaemon.Controllers
         [HttpGet]
         public IActionResult SpeakerSetting(string voice_db)
         {
-            SpeakerSettingModel model = Setting.Speaker.Clone();
+            var model = Setting.Speaker.Clone();
             model.VoiceDbName = voice_db ?? Setting.Speaker.VoiceDbName;
 
             // 話者名のリストを取得する
@@ -94,7 +94,7 @@ namespace VoiceroidDaemon.Controllers
             if (speaker_setting != null)
             {
                 string error_message = null;
-                bool saved = false;
+                var saved = false;
                 Setting.Lock();
                 try
                 {
@@ -144,8 +144,10 @@ namespace VoiceroidDaemon.Controllers
         {
             // 選択項目リストを作成する
             // 0番目に値がnullなDefault項目を追加する
-            List<SelectListItem> result = new List<SelectListItem>();
-            result.Add(new SelectListItem("Default", ""));
+            var result = new List<SelectListItem>
+            {
+                new SelectListItem("Default", "")
+            };
             if (values != null)
             {
                 result.AddRange(values.Select(name => new SelectListItem(name, name)));

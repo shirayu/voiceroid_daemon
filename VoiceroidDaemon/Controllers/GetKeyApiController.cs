@@ -27,24 +27,24 @@ namespace VoiceroidDaemon.Controllers
         {
             try
             {
-                ProcessStartInfo start_info = new ProcessStartInfo();
-                start_info.FileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Injecter.exe";
-                start_info.Arguments = "\"" + Setting.System.InstallPath + "\\" + (exe ?? Setting.System.VoiceroidEditorExe) + "\"";
-                start_info.CreateNoWindow = true;
-                start_info.RedirectStandardOutput = true;
-                using (Process process = Process.Start(start_info))
+                var start_info = new ProcessStartInfo
                 {
-                    process.WaitForExit(10000);
-                    if (process.HasExited == true)
-                    {
-                        string result = process.StandardOutput.ReadToEnd();
-                        process.WaitForExit();
-                        return result;
-                    }
-                    else
-                    {
-                        process.Kill();
-                    }
+                    FileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Injecter.exe",
+                    Arguments = "\"" + Setting.System.InstallPath + "\\" + (exe ?? Setting.System.VoiceroidEditorExe) + "\"",
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true
+                };
+                using var process = Process.Start(start_info);
+                process.WaitForExit(10000);
+                if (process.HasExited == true)
+                {
+                    var result = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+                    return result;
+                }
+                else
+                {
+                    process.Kill();
                 }
             }
             catch (Exception) { }

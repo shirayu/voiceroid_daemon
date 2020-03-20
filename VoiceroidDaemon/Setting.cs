@@ -43,14 +43,14 @@ namespace VoiceroidDaemon
         /// <summary>
         /// バイナリセマフォ
         /// </summary>
-        private static SemaphoreSlim Semaphore = new SemaphoreSlim(1);
+        private static readonly SemaphoreSlim s_semaphore = new SemaphoreSlim(1);
 
         /// <summary>
         /// セマフォを取得する
         /// </summary>
         public static void Lock()
         {
-            Semaphore.Wait();
+            s_semaphore.Wait();
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace VoiceroidDaemon
         /// </summary>
         public static void Unlock()
         {
-            Semaphore.Release();
+            s_semaphore.Release();
         }
 
         /// <summary>
@@ -109,15 +109,13 @@ namespace VoiceroidDaemon
                 using (Stream stream = new FileStream(Path, FileMode.Create, FileAccess.Write))
                 {
                     // 人が読みやすい形でシリアライズするためにインデントと改行を有効にしてCreateJsonWriterを作成する
-                    using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, true, true, "  "))
-                    {
-                        SettingJson setting;
-                        setting.System = System;
-                        setting.Speaker = Speaker;
-                        var serializer = new DataContractJsonSerializer(typeof(SettingJson));
-                        serializer.WriteObject(writer, setting);
-                        writer.Flush();
-                    }
+                    using var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, true, true, "  ");
+                    SettingJson setting;
+                    setting.System = System;
+                    setting.Speaker = Speaker;
+                    var serializer = new DataContractJsonSerializer(typeof(SettingJson));
+                    serializer.WriteObject(writer, setting);
+                    writer.Flush();
                 }
                 return true;
             }
@@ -143,7 +141,7 @@ namespace VoiceroidDaemon
                 {
                     return "インストールディレクトリが存在しません。";
                 }
-                string exe_path = $"{System.InstallPath}\\{System.VoiceroidEditorExe}";
+                var exe_path = $"{System.InstallPath}\\{System.VoiceroidEditorExe}";
                 if (File.Exists(exe_path) == false)
                 {
                     return "VOICEROID2エディタの実行ファイルが存在しません。";
@@ -152,13 +150,11 @@ namespace VoiceroidDaemon
                 // アイコンを取得する
                 try
                 {
-                    using (var icon = Icon.ExtractAssociatedIcon(exe_path))
-                    using (var bitmap = icon.ToBitmap())
-                    using (var stream = new MemoryStream())
-                    {
-                        bitmap.Save(stream, ImageFormat.Png);
-                        IconByteArray = stream.ToArray();
-                    }
+                    using var icon = Icon.ExtractAssociatedIcon(exe_path);
+                    using var bitmap = icon.ToBitmap();
+                    using var stream = new MemoryStream();
+                    bitmap.Save(stream, ImageFormat.Png);
+                    IconByteArray = stream.ToArray();
                 }
                 catch (Exception) { }
 
@@ -174,7 +170,7 @@ namespace VoiceroidDaemon
                 else
                 {
                     // 未指定の場合、初めに見つけたものを読み込む
-                    string language_name = AitalkWrapper.LanguageList.FirstOrDefault() ?? "";
+                    var language_name = AitalkWrapper.LanguageList.FirstOrDefault() ?? "";
                     AitalkWrapper.LoadLanguage(language_name);
                 }
 
@@ -222,7 +218,7 @@ namespace VoiceroidDaemon
                 if (0 < Speaker.VoiceDbName.Length)
                 {
                     // 指定されたボイスライブラリを読み込む
-                    string voice_db_name = Speaker.VoiceDbName;
+                    var voice_db_name = Speaker.VoiceDbName;
                     AitalkWrapper.LoadVoice(voice_db_name);
 
                     // 話者が指定されているときはその話者を選択する
@@ -234,7 +230,7 @@ namespace VoiceroidDaemon
                 else
                 {
                     // 未指定の場合、初めに見つけたものを読み込む
-                    string voice_db_name = AitalkWrapper.VoiceDbList.FirstOrDefault() ?? "";
+                    var voice_db_name = AitalkWrapper.VoiceDbList.FirstOrDefault() ?? "";
                     AitalkWrapper.LoadVoice(voice_db_name);
                 }
 

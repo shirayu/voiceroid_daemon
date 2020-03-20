@@ -24,8 +24,10 @@ namespace VoiceroidDaemon.Controllers
         [HttpGet("{text}")]
         public string ConvertTextFromRequest(string text)
         {
-            SpeechModel model = new SpeechModel();
-            model.Text = text;
+            var model = new SpeechModel
+            {
+                Text = text
+            };
             return ConvertTextFromPost(model);
         }
 

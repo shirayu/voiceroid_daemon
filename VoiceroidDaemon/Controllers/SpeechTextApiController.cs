@@ -25,8 +25,10 @@ namespace VoiceroidDaemon.Controllers
         [HttpGet("{text}")]
         public IActionResult SpeectTextFromRequest(string text)
         {
-            SpeechModel model = new SpeechModel();
-            model.Text = text;
+            var model = new SpeechModel
+            {
+                Text = text
+            };
             return SpeectTextFromPost(model);
         }
 
