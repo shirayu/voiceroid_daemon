@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Text;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Aitalk;
 
 namespace VoiceroidDaemon
 {
@@ -26,7 +19,7 @@ namespace VoiceroidDaemon
                 .Build();
 
             // 設定ファイルを読み込む
-            string setting_path = config.GetValue<string>("setting");
+            var setting_path = config.GetValue<string>("setting");
             if ((setting_path != null) && (0 < setting_path.Length))
                 Setting.Path = setting_path;
             if (Setting.Load() == false)
