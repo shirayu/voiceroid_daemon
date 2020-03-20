@@ -4,15 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VoiceroidDaemon.Controllers
 {
-    /// <summary>
-    /// 話者情報を取得するするコントローラ
-    /// </summary>
+
+    [Route("api/get/current_speaker")]
+    [ApiController]
+    public class GetCurrentSpeakerController : ControllerBase
+    {
+        /// <summary>
+        /// 現在の話者情報を取得する
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetCurrentSpeaker()
+        {
+            return Ok(Setting.Speaker);
+        }
+    }
+
+
     [Route("api/get/speakers")]
     [ApiController]
     public class GetSpeakersController : ControllerBase
     {
         /// <summary>
-        /// 話者情報を取得する
+        /// 話者リストを取得する
         /// </summary>
         /// <returns></returns>
         public IActionResult GetSpeakers()
@@ -28,7 +41,7 @@ namespace VoiceroidDaemon.Controllers
             }
             Setting.ApplySpeakerSetting(Setting.Speaker);
             Setting.Unlock();
-           return Ok(libname2speaker);
+            return Ok(libname2speaker);
         }
     }
 }
