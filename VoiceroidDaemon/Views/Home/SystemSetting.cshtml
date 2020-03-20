@@ -77,5 +77,11 @@
     @Html.LabelFor(model => model.ListeningAddress, "待ち受けアドレス");
     @Html.TextBoxFor(model => model.ListeningAddress, Model.ListeningAddress, new { placeholder = SystemSettingModel.DefaultListeningAddress })
     <hr />
+    @Html.Label("設定ファイルのパス");
+    @Html.TextBox("setting_file_path", SystemSettingModel.SettingPath(), new{
+        ReadOnly=true,
+        @style="background-color: #c7c7c7",
+     });
+    <hr />
     <input type="submit" value="保存する" />
 }

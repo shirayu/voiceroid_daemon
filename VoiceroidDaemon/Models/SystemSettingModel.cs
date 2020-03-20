@@ -69,6 +69,12 @@ namespace VoiceroidDaemon.Models
         public string ListeningAddress { get; set; }
         public static string DefaultListeningAddress = "http://127.0.0.1:8080/";
 
+        public static string SettingPath()
+        {
+            return Setting.Path;
+        }
+
+
         /// <summary>
         /// デシリアライズ前に呼ばれる。
         /// 初期値を代入する。

@@ -20,8 +20,14 @@ namespace VoiceroidDaemon
 
             // 設定ファイルを読み込む
             var setting_path = config.GetValue<string>("setting");
-            if ((setting_path != null) && (0 < setting_path.Length))
-                Setting.Path = setting_path;
+            if (setting_path == null || 0 == setting_path.Length)
+            {
+                Setting.Path = Path.GetFullPath(path: Setting.DefaultPath);
+            }
+            else
+            {
+                Setting.Path = Path.GetFullPath(setting_path);
+            }
             if (Setting.Load() == false)
             {
                 // 読み出しに失敗したら設定ファイルを新規作成する
