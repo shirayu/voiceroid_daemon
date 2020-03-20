@@ -39,6 +39,18 @@ namespace VoiceroidDaemon.Controllers
             Setting.Lock();
             try
             {
+                if (speech_model.SpeakerSetting != null
+                    && speech_model.SpeakerSetting.VoiceDbName.Length > 0
+                    && speech_model.SpeakerSetting.SpeakerName.Length > 0
+                    && AitalkWrapper.Parameter.CurrentSpeakerName != speech_model.SpeakerSetting.SpeakerName)
+                {
+                    var error_message = Setting.ApplySpeakerSetting(speech_model.SpeakerSetting);
+                    if (error_message != null)
+                    {
+                        return BadRequest($"Saved but {error_message}");
+                    }
+                }
+
                 // 話者パラメータを設定する
                 var speaker = speech_model.Speaker ?? new SpeakerModel();
                 AitalkWrapper.Parameter.VoiceVolume = (0 <= speaker.Volume) ? speaker.Volume : Setting.DefaultSpeakerParameter.Volume;

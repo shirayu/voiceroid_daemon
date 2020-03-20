@@ -19,5 +19,10 @@
         /// 話者のパラメータ
         /// </summary>
         public SpeakerModel Speaker { get; set; }
+
+        /// <summary>
+        /// 話者情報
+        /// </summary>
+        public SpeakerSettingModel SpeakerSetting { get; set; }
     }
 }
