@@ -99,6 +99,10 @@ WAVEファイルのフォーマットは44.1kHz,16bit,モノラルです。
     "PauseMiddle" : <短ポーズ時間[ms] (80～500) PauseLong以下>,
     "PauseLong" : <長ポーズ時間[ms] (100～2000) PauseMiddle以上>,
     "PauseSentence" : <文末ポーズ時間[ms] (0～10000)>
+  },
+  SpeakerSetting : {
+    "voiceDbName" : "ボイスライブラリ名",
+    "speakerName" : "話者名"
   }
 }
 ```
@@ -106,6 +110,9 @@ WAVEファイルのフォーマットは44.1kHz,16bit,モノラルです。
 指定しないパラメータは省略できます。その場合、ボイスライブラリの初期値が使用されます。  
 また、`Volume`, `Speed`, `Pitch`, `Emphasis`はNaNを指定すると初期値が、  
 `PauseMiddle`, `PauseLong`, `PauseSentence`は-1を指定すると初期値が使用されます。
+
+`SpeakerSettingは`省略または文字列長が0だと、使われていた話者が使用されます。
+誤った値を指定すると、正しい値が設定されるまで合成に失敗し続けますのでご注意ください。
 
 ## ライセンス
 
