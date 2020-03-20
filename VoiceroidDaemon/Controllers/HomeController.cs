@@ -73,6 +73,7 @@ namespace VoiceroidDaemon.Controllers
                 {
                     AitalkWrapper.LoadVoice(model.VoiceDbName);
                     voice_names = AitalkWrapper.Parameter.VoiceNames;
+                    _ = Setting.ApplySpeakerSetting(Setting.Speaker);
                 }
             }
             catch (Exception) { }
