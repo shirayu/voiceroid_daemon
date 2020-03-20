@@ -17,7 +17,7 @@ namespace VoiceroidDaemon.Models
         /// </summary>
         [DataMember]
         public string SpeakerName { get; set; }
-        
+
         /// <summary>
         /// デシリアライズ前に呼ばれる。
         /// 初期値を代入する。

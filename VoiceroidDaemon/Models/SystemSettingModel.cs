@@ -49,7 +49,7 @@ namespace VoiceroidDaemon.Models
         /// </summary>
         [DataMember]
         public string SymbolDictionaryPath { get; set; }
-        
+
         /// <summary>
         /// 読み仮名変換のタイムアウト[ms]
         /// </summary>

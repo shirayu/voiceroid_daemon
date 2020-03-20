@@ -53,7 +53,7 @@ namespace Aitalk
         /// パラメータが変更されたときにtrueになる
         /// </summary>
         public bool IsParameterChanged { get; internal set; } = true;
-        
+
         /// <summary>
         /// 仮名変換時のバッファサイズ(バイト数)
         /// </summary>
@@ -69,7 +69,7 @@ namespace Aitalk
         {
             get { return TtsParam.RawBufferCapacityInBytes; }
         }
-        
+
         /// <summary>
         /// trueのとき仮名変換結果に文節終了位置を埋め込む
         /// </summary>
@@ -87,7 +87,7 @@ namespace Aitalk
                 {
                     TtsParam.ExtendFormatFlags &= ~AitalkCore.ExtendFormat.AutoBookmark;
                 }
-                
+
             }
         }
 
@@ -157,7 +157,7 @@ namespace Aitalk
                 IsParameterChanged = true;
             }
         }
-        
+
         /// <summary>
         /// 音量(0～2)
         /// </summary>

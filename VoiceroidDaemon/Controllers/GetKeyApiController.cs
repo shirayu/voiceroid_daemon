@@ -39,7 +39,7 @@ namespace VoiceroidDaemon.Controllers
                     {
                         string result = process.StandardOutput.ReadToEnd();
                         process.WaitForExit();
-                        return result; 
+                        return result;
                     }
                     else
                     {

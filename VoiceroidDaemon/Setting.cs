@@ -39,7 +39,7 @@ namespace VoiceroidDaemon
         /// 話者パラメータの初期値
         /// </summary>
         public static SpeakerModel DefaultSpeakerParameter;
-        
+
         /// <summary>
         /// バイナリセマフォ
         /// </summary>
@@ -161,7 +161,7 @@ namespace VoiceroidDaemon
                     }
                 }
                 catch (Exception) { }
-                
+
                 // AITalkを初期化する
                 AitalkWrapper.Initialize(System.InstallPath, System.AuthCodeSeed);
 
@@ -249,7 +249,7 @@ namespace VoiceroidDaemon
                     PauseLong = AitalkWrapper.Parameter.PauseLong,
                     PauseSentence = AitalkWrapper.Parameter.PauseSentence
                 };
-                
+
                 return null;
             }
             catch (AitalkException ex)

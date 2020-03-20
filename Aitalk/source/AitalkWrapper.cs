@@ -112,7 +112,7 @@ namespace Aitalk
                 return result.ToArray();
             }
         }
-        
+
         /// <summary>
         /// 言語ライブラリを読み込む
         /// </summary>
@@ -234,7 +234,7 @@ namespace Aitalk
             {
                 throw new AitalkException($"ボイスライブラリ'{voice_db_name}'の読み込みに失敗しました。", result);
             }
-            
+
             // パラメータを読み込む
             GetParameters(out var tts_param, out var speaker_params);
             tts_param.TextBufferCallback = TextBufferCallback;
@@ -390,7 +390,7 @@ namespace Aitalk
             {
                 gc_handle.Free();
             }
-            
+
             // 変換結果に含まれるIrq MARKのバイト位置を文字位置へ置き換える
             Encoding encoding = Encoding.GetEncoding(932);
             return ReplaceIrqMark(encoding.GetString(job_data.Output.ToArray()), shiftjis_positions);
@@ -427,7 +427,7 @@ namespace Aitalk
                 shiftjis_index += shiftjis_count;
             }
             shiftjis_positions[shiftjis_length] = char_count;
-            
+
             // ヌル終端を付け加える
             shiftjis_string = new byte[shiftjis_length + 1];
             Buffer.BlockCopy(shiftjis_string_internal, 0, shiftjis_string, 0, shiftjis_length);
@@ -526,7 +526,7 @@ namespace Aitalk
         public static void KanaToSpeech(string kana, Stream wave_stream, int timeout = 0)
         {
             UpdateParameter();
-            
+
             // コールバックメソッドとの同期オブジェクトを用意する
             SpeechJobData job_data = new SpeechJobData();
             job_data.BufferCapacity = 176400;
@@ -574,7 +574,7 @@ namespace Aitalk
             var serializer = new DataContractJsonSerializer(typeof(List<TtsEventData>));
             serializer.WriteObject(event_stream, job_data.EventData);
             int padding = 4 - ((int)event_stream.Length % 4);
-            for(int cnt = 0; cnt < padding; cnt++)
+            for (int cnt = 0; cnt < padding; cnt++)
             {
                 event_stream.WriteByte(0x0);
             }
@@ -661,15 +661,15 @@ namespace Aitalk
             }
             switch (reason)
             {
-            case AitalkCore.EventReason.PhoneticLabel:
-            case AitalkCore.EventReason.Bookmark:
-            case AitalkCore.EventReason.AutoBookmark:
-                job_data.EventData.Add(new TtsEventData(tick, name, reason));
-                break;
+                case AitalkCore.EventReason.PhoneticLabel:
+                case AitalkCore.EventReason.Bookmark:
+                case AitalkCore.EventReason.AutoBookmark:
+                    job_data.EventData.Add(new TtsEventData(tick, name, reason));
+                    break;
             }
             return 0;
         }
-        
+
         /// <summary>
         /// パラメータ
         /// </summary>
@@ -694,7 +694,7 @@ namespace Aitalk
         /// 読み込まれている言語ライブラリ名
         /// </summary>
         public static string CurrentLanguage { get; private set; }
-        
+
         /// <summary>
         /// ボイスライブラリが読み込まれているならtrueを返す
         /// </summary>
@@ -747,22 +747,22 @@ namespace Aitalk
                 Value = value;
                 switch (reason)
                 {
-                case AitalkCore.EventReason.PhoneticLabel:
-                    Type = "Phonetic";
-                    break;
-                case AitalkCore.EventReason.Bookmark:
-                    Type = "Bookmark";
-                    break;
-                case AitalkCore.EventReason.AutoBookmark:
-                    Type = "AutoBookmark";
-                    break;
-                default:
-                    Type = "";
-                    break;
+                    case AitalkCore.EventReason.PhoneticLabel:
+                        Type = "Phonetic";
+                        break;
+                    case AitalkCore.EventReason.Bookmark:
+                        Type = "Bookmark";
+                        break;
+                    case AitalkCore.EventReason.AutoBookmark:
+                        Type = "AutoBookmark";
+                        break;
+                    default:
+                        Type = "";
+                        break;
                 }
             }
         }
-        
+
         /// <summary>
         /// ボイスライブラリのサンプルレート[Hz]
         /// </summary>

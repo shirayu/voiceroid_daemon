@@ -40,7 +40,7 @@ namespace VoiceroidDaemon
                 return null;
             }
         }
-        
+
         /// <summary>
         /// 認証コードの取得のためにDLLインジェクション先で実行されるコード
         /// </summary>

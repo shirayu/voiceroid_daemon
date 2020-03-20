@@ -63,7 +63,7 @@ namespace VoiceroidDaemon
         /// </summary>
         [DataMember]
         public string VoiceName = "";
-        
+
         /// <summary>
         /// 読み仮名変換のタイムアウト[ms]
         /// </summary>
@@ -97,7 +97,7 @@ namespace VoiceroidDaemon
         /// コンストラクタ
         /// </summary>
         private Configuration() { }
-        
+
         /// <summary>
         /// 既定の初期値でないメンバーに初期値を代入する
         /// </summary>
@@ -108,7 +108,7 @@ namespace VoiceroidDaemon
             LanguageName = "standard";
             ListeningAddress = "http://127.0.0.1:8080/";
         }
-        
+
         /// <summary>
         /// 設定ファイルを読み込む
         /// </summary>
@@ -160,7 +160,7 @@ namespace VoiceroidDaemon
             }
         }
     }
-    
+
     internal static class IniFileHandler
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]

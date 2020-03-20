@@ -58,13 +58,13 @@ namespace VoiceroidDaemon.Controllers
             }
             return SystemSetting();
         }
-        
+
         [HttpGet]
         public IActionResult SpeakerSetting(string voice_db)
         {
             SpeakerSettingModel model = Setting.Speaker.Clone();
             model.VoiceDbName = voice_db ?? Setting.Speaker.VoiceDbName;
-            
+
             // 話者名のリストを取得する
             string[] voice_names = null;
             Setting.Lock();
@@ -81,7 +81,7 @@ namespace VoiceroidDaemon.Controllers
             {
                 Setting.Unlock();
             }
-            
+
             // 音声ライブラリと話者のリストを作成してビューに渡す
             ViewData["VoiceDbListItems"] = GenerateSelectListItems(AitalkWrapper.VoiceDbList);
             ViewData["SpeakerListItems"] = GenerateSelectListItems(voice_names);
@@ -120,7 +120,7 @@ namespace VoiceroidDaemon.Controllers
             }
             return SpeakerSetting((string)null);
         }
-        
+
         [HttpGet("/favicon.png")]
         public IActionResult Favicon()
         {
@@ -133,13 +133,13 @@ namespace VoiceroidDaemon.Controllers
                 return new NotFoundResult();
             }
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
+
         private static List<SelectListItem> GenerateSelectListItems(string[] values)
         {
             // 選択項目リストを作成する

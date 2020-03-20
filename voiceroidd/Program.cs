@@ -28,7 +28,7 @@ namespace VoiceroidDaemon
             // コマンドライン引数をパースしてOnExecute()を呼び出す
             return CommandLineApplication.Execute<Program>(args);
         }
-        
+
         /// <summary>
         /// 設定ファイルのパス
         /// </summary>
@@ -41,7 +41,7 @@ namespace VoiceroidDaemon
         /// </summary>
         [Argument(0, Description = "auth or server")]
         public string OperationMode { get; } = "";
-        
+
         /// <summary>
         /// プログラムの実行する
         /// </summary>
@@ -59,18 +59,18 @@ namespace VoiceroidDaemon
                 // 動作モードに応じて処理を開始する
                 switch (OperationMode.ToLower())
                 {
-                case "auth":
-                    GetAuthCode();
-                    break;
+                    case "auth":
+                        GetAuthCode();
+                        break;
 
-                case "server":
-                    StartServer();
-                    break;
+                    case "server":
+                        StartServer();
+                        break;
 
-                default:
-                    // ヘルプテキストを表示する
-                    MessageBox.Show(
-$@"コマンド
+                    default:
+                        // ヘルプテキストを表示する
+                        MessageBox.Show(
+    $@"コマンド
 ・認証コードを取得する。
     voiceroidd auth
 ・HTTPサーバーを起動する。
@@ -79,11 +79,11 @@ $@"コマンド
 オプション
 ・設定ファイルのパスを明示的に指定する。未指定の場合は'config.json'が使用される。
     -c <filepath>"
-                        , Caption);
-                    break;
+                            , Caption);
+                        break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), Caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -263,13 +263,13 @@ $@"コマンド
                 }
             }
         }
-        
+
         // リクエストを処理する
         private void ProcessRequest(HttpListenerContext context)
         {
             HttpListenerRequest request = context.Request;
             HttpListenerResponse responce = context.Response;
-            
+
             try
             {
                 if (request.HttpMethod != "GET")
@@ -280,7 +280,7 @@ $@"コマンド
                 int offset = 0;
                 string path = request.RawUrl.Substring(1);
                 var query = HttpUtility.ParseQueryString(request.Url.Query);
-                
+
                 // メソッド名を調べる
                 if (UrlMatch(path, "kana/", ref offset) == true)
                 {
@@ -358,7 +358,7 @@ $@"コマンド
                     throw new FileNotFoundException();
                 }
             }
-            catch(NotImplementedException)
+            catch (NotImplementedException)
             {
                 responce.StatusCode = (int)HttpStatusCode.NotImplemented;
             }
@@ -393,7 +393,7 @@ $@"コマンド
                 return false;
             }
         }
-        
+
         /// <summary>
         /// 設定
         /// </summary>

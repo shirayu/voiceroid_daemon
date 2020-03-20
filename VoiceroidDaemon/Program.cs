@@ -24,7 +24,7 @@ namespace VoiceroidDaemon
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .Build();
-            
+
             // 設定ファイルを読み込む
             string setting_path = config.GetValue<string>("setting");
             if ((setting_path != null) && (0 < setting_path.Length))
@@ -38,7 +38,7 @@ namespace VoiceroidDaemon
                     throw new IOException("設定ファイルの作成に失敗しました。");
                 }
             }
-            
+
             // Webサーバーを構成する
             var web_host_builder = WebHost.CreateDefaultBuilder();
             web_host_builder.UseConfiguration(config);
@@ -49,7 +49,7 @@ namespace VoiceroidDaemon
                 web_host_builder.UseUrls(Setting.System.ListeningAddress);
             }
             var web_host = web_host_builder.Build();
-            
+
             // Webサーバーを開始する
             web_host.Run();
         }

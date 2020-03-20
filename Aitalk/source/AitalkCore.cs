@@ -124,7 +124,7 @@ namespace Aitalk
             JeitaRuby = 0x1,
             AutoBookmark = 0x10
         }
-        
+
         [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
         public struct Config
         {
@@ -184,7 +184,7 @@ namespace Aitalk
             public int NumberOfSpeakers;
 
             public int ReservedZero;
-            
+
             [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
             public struct JeitaParam
             {
@@ -219,7 +219,7 @@ namespace Aitalk
 
                 [DataMember]
                 public float Volume;
-                
+
                 [DataMember]
                 public float Speed;
 

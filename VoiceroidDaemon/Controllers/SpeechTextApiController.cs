@@ -65,13 +65,13 @@ namespace VoiceroidDaemon.Controllers
                 {
                     return new NoContentResult();
                 }
-                
+
                 // 音声変換して結果を返す
                 var wave_stream = new MemoryStream();
                 AitalkWrapper.KanaToSpeech(kana, wave_stream, Setting.System.SpeechTimeout);
                 return new FileContentResult(wave_stream.ToArray(), "audio/wav");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return new NoContentResult();
             }
