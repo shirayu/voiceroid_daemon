@@ -74,6 +74,12 @@ namespace VoiceroidDaemon.Models
             return Setting.Path;
         }
 
+        /// <summary>
+        /// CORSアドレス
+        /// </summary>
+        [DataMember]
+        public string CorsAddresses { get; set; }
+        public static string DefaultCorsAddresses = "";
 
         /// <summary>
         /// デシリアライズ前に呼ばれる。
@@ -109,6 +115,7 @@ namespace VoiceroidDaemon.Models
             KanaTimeout = 0;
             SpeechTimeout = 0;
             ListeningAddress = DefaultListeningAddress;
+            CorsAddresses = DefaultCorsAddresses;
         }
 
         /// <summary>

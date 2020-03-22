@@ -77,6 +77,9 @@
     @Html.LabelFor(model => model.ListeningAddress, "待ち受けアドレス");
     @Html.TextBoxFor(model => model.ListeningAddress, Model.ListeningAddress, new { placeholder = SystemSettingModel.DefaultListeningAddress })
     <hr />
+    @Html.LabelFor(model => model.CorsAddresses, "CORSを許可するアドレス [,区切りで複数指定できます] (再起動するまで変更は反映されません)");
+    @Html.TextBoxFor(model => model.CorsAddresses, Model.CorsAddresses, new { placeholder = SystemSettingModel.DefaultCorsAddresses })
+    <hr />
     @Html.Label("設定ファイルのパス");
     @Html.TextBox("setting_file_path", SystemSettingModel.SettingPath(), new{
         ReadOnly=true,
